@@ -4,7 +4,7 @@ export default function Square({
 }: Readonly<Record<string, any>>) {
   return (
     <button
-      className="bg-white border border-[#999] float-start font-bold text-xl leading-8 h-8 -mr-0.5 -mt-0.5 p-0 text-center w-8"
+      className="bg-white border border-violet-200 font-bold text-5xl p-0 text-center h-28 w-28"
       onClick={onSquareClick}>
       {value}
     </button>

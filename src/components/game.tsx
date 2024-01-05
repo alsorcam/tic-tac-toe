@@ -32,11 +32,9 @@ export default function Game() {
   });
 
   return (
-    <div className="flex gap-12">
-      <div>
-        <Board isNextX={isNextX} squares={currentSquares} onPlay={handlePlay} />
-      </div>
-      <ol>{moves}</ol>
+    <div className="flex flex-col gap-12">
+      <Board isNextX={isNextX} squares={currentSquares} onPlay={handlePlay} />
+      <ol className="flex flex-col-reverse gap-2 items-center">{moves}</ol>
     </div>
   );
 }

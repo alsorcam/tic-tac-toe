@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  @apply box-border;
-}
-
 body {
-  @apply p-0 m-5 font-sans;
-}
-
-.board-row:after {
-  @apply clear-both content-[''] table;
+  @apply p-0 m-6 mt-16 bg-violet-50 text-gray-800;
 }
