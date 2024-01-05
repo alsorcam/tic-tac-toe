@@ -10,10 +10,6 @@ body {
   @apply p-0 m-5 font-sans;
 }
 
-.square {
-  @apply bg-white border border-[#999] float-start font-bold text-xl leading-8 h-8 -mr-0.5 -mt-0.5 p-0 text-center w-8;
-}
-
 .board-row:after {
   @apply clear-both content-[''] table;
 }
