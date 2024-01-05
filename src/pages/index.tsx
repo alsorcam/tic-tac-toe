@@ -1,8 +1,5 @@
-import Board from './_app'
+import App from './_app';
 
-
-export default function Home() {
-  return (
-    <Board />
-  )
+export default function MyApp() {
+  return <App />;
 }

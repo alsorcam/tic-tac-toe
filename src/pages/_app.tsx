@@ -1,13 +1,5 @@
-import "@/styles/globals.css";
-import React from "react";
-
-function Square({ value, onSquareClick }: Readonly<Record<string, any>>) {
-  return (
-    <button className="square" onClick={onSquareClick}>
-      {value}
-    </button>
-  );
-}
+import '@/styles/globals.css';
+import React from 'react';
 
 export default function Board() {
   const [isNextX, setIsNextX] = React.useState(true);
@@ -18,7 +10,7 @@ export default function Board() {
       return;
     }
     const nextSquares = squares.slice();
-    nextSquares[i] = isNextX ? "X" : "O";
+    nextSquares[i] = isNextX ? 'X' : 'O';
     setSquares(nextSquares);
     setIsNextX(!isNextX);
   }
@@ -28,7 +20,7 @@ export default function Board() {
   if (winner) {
     status = `Winner: ${winner}`;
   } else {
-    status = `Next player: ${isNextX ? "X" : "O"}`;
+    status = `Next player: ${isNextX ? 'X' : 'O'}`;
   }
 
   return (
@@ -50,6 +42,14 @@ export default function Board() {
         <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
       </div>
     </>
+  );
+}
+
+function Square({ value, onSquareClick }: Readonly<Record<string, any>>) {
+  return (
+    <button className="square" onClick={onSquareClick}>
+      {value}
+    </button>
   );
 }
 
