@@ -1,5 +1,6 @@
 import React from 'react';
 import Board from './board';
+import History from './history';
 
 export default function Game() {
   const [history, setHistory] = React.useState([Array(9).fill(null)]);
@@ -13,28 +14,14 @@ export default function Game() {
     setCurrentMove(nextHistory.length - 1);
   }
 
-  function jumpTo(nextMove: number) {
+  function handleJump(nextMove: number) {
     setCurrentMove(nextMove);
   }
-
-  const moves = history.map((_, move) => {
-    let description;
-    if (move > 0) {
-      description = 'Go to move #' + move;
-    } else {
-      description = 'Go to game start';
-    }
-    return (
-      <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
-      </li>
-    );
-  });
 
   return (
     <div className="flex flex-col gap-12">
       <Board isNextX={isNextX} squares={currentSquares} onPlay={handlePlay} />
-      <ol className="flex flex-col-reverse gap-2 items-center">{moves}</ol>
+      <History history={history} onJump={handleJump} />
     </div>
   );
 }
