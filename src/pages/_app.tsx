@@ -1,18 +1,59 @@
 import '@/styles/globals.css';
 import React from 'react';
 
-export default function Board() {
-  const [isNextX, setIsNextX] = React.useState(true);
-  const [squares, setSquares] = React.useState(Array(9).fill(null));
+export default function Game() {
+  const [history, setHistory] = React.useState([Array(9).fill(null)]);
+  const [currentMove, setCurrentMove] = React.useState(0);
+  const isNextX = currentMove % 2 === 0;
+  const currentSquares = history[currentMove];
 
+  function handlePlay(nextSquares: Array<string | null>): void {
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
+  }
+
+  function jumpTo(nextMove: number) {
+    setCurrentMove(nextMove);
+  }
+
+  const moves = history.map((_, move) => {
+    let description;
+    if (move > 0) {
+      description = 'Go to move #' + move;
+    } else {
+      description = 'Go to game start';
+    }
+    return (
+      <li key={move}>
+        <button onClick={() => jumpTo(move)}>{description}</button>
+      </li>
+    );
+  });
+
+  return (
+    <div className="flex gap-12">
+      <div>
+        <Board isNextX={isNextX} squares={currentSquares} onPlay={handlePlay} />
+      </div>
+      <ol>{moves}</ol>
+    </div>
+  );
+}
+
+interface BoardProps {
+  isNextX: boolean;
+  squares: Array<string | null>;
+  onPlay: Function;
+}
+function Board({ isNextX, squares, onPlay }: Readonly<BoardProps>) {
   function handleClick(i: number): void {
     if (squares[i] || calculateWinner(squares)) {
       return;
     }
     const nextSquares = squares.slice();
     nextSquares[i] = isNextX ? 'X' : 'O';
-    setSquares(nextSquares);
-    setIsNextX(!isNextX);
+    onPlay(nextSquares);
   }
 
   const winner = calculateWinner(squares);
